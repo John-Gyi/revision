@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <h1>User Detail</h1>
+   User Name:<%= user.name %><br>
+   User Email:<%=user.email %><br>
+   User Password:<%=user.password %><br>
+  <a href="/users/userupdate/<%=user._id%>"><button type="button">Update</button></a>
+
+  <button type="button" name="button" onclick="del();">Delete</button>
+
+    <script type="text/javascript">
+      function del(){
+        var a=confirm("Are you sure to delete");
+        if(a){
+          location.href="/users/userdelete/<%=user._id%>";
+        }
+      }
+    </script>
+</body>
+</html>

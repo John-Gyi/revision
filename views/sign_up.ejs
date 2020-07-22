@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Sign Up For Your Account</h1>
+    <form name="fm" action="/signup" method="post">
+      <label for="name">User Name:</label>
+      <input type="text" name="name" id="name" value=""><p>
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email" value=""><p>
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password" value="" required>
+      <p>
+      <button type="button" name="button" id="sub">Sign Up</button>
+    </form>
+
+  </body>
+  <script type="text/javascript" src="/javascripts/jquery.js">
+
+  </script>
+  <script type="text/javascript">
+    $('#email').blur(function() {
+          console.log('call');
+          var data = {
+            email1: $('#email').val()
+          };
+          if (data.email1 != '') {
+            $.ajax({
+                  url: '/duemail',
+                  data: data,
+                  type: 'POST',
+                  success: function(result) {
+                    if (result.status) {
+                      alert('duplicate email and not validate ');
+                      $('#email').val(' ');
+                      $('#email').focus();
+                    }
+                  }
+
+  })
+}
+})
+$('#sub').click(function(){
+  var datap={
+    password1:$('#password').val()
+  };
+  if(datap.password1!=''){
+    $.ajax({url:'/passval',
+    data:datap,
+    type:'POST',
+    success:function(result){
+      if(result.status){
+        if($('#email').val()==''|| $('#name').val()==''){
+          alert('Please enter other fields');
+        }else {
+
+          fm.submit();
+        }
+      }
+      else {
+        alert('validate password and not validate ');
+        $('#password').val('');
+        $('#password').focus();
+      }
+    }
+  })
+  }
+})
+</script>
+</html>

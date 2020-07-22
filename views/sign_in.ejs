@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Sign In</h1>
+    <form action="/signin" method="post">
+      <label for="email">Email:</label>
+      <input type="email" name="email" value="" id="email"><p>
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password" value=""><p>
+      <input type="checkbox" id="rememberMe" name="" value="">Remember Me<br>
+      <input type="submit" name="" value="Sign In">
+    </form>
+  </body>
+  <script type="text/javascript" src="/javascripts/jquery.js">
+
+  </script>
+  <script type="text/javascript" src="/javascripts/js.cookie.min.js">
+
+  </script>
+  <script type="text/javascript">
+
+    $('#rememberMe').click(function(){
+      if($(this).prop('checked')==true){
+        console.log('call');
+        Cookies.set('email1',$('#email').val(),{expires:7});
+      }else {
+        Cookies.remove('email1');
+      }
+    });
+    if(Cookies.get('email1')){
+      $('#email').val(Cookies.get('email1'));
+      $('#rememberMe').prop('checked',true);
+    }
+  </script>
+  </html>
