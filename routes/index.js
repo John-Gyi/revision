@@ -4,7 +4,7 @@ var Admin=require('../model/Admin');
 var mongoose=require('mongoose');
 var session=require('express-session');
 var validator=require('email-validator');
-var passwordValidator=require('password-validator');
+var passwordValidator=require('password-validator'); //rev
 var schema = new passwordValidator();
 schema
 .is().min(8)                                    // Minimum length 8
