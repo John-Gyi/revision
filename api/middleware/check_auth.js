@@ -1,12 +1,13 @@
 var jwt=require('jsonwebtoken');
 module.exports=function(req,res,next){
     try{
-        var token=req.headers.token;
-        var decode=jwt.verify(token,'john');
+        const token=req.headers.token;
+        const decode=jwt.verify(token,'john');
+        req.user=decode.user;
         next();
     }catch(error){
         res.status(401).json({
-            message:"Hey U can't access before signin"
+            message:"Token invalid"
         })
     }
 }

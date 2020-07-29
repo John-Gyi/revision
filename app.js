@@ -10,6 +10,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var apiUserRouter=require('./api/routes/user');
 var apiAdminRouter=require('./api/routes/admin');
+var apiAuthRouter=require('./api/routes/auth');
+var apiProfileRouter=require('./api/routes/profile');
 
 var app = express();
 
@@ -28,9 +30,11 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }))
-mongoose.connect('mongodb+srv://john12:john12@heyman.6uluk.mongodb.net/<dbname>?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://john12:john12@heyman.6uluk.mongodb.net/<dbname>?retryWrites=true&w=majority',{useUnifiedTopology: true,useNewUrlParser: true,useCreateIndex:true,useFindAndModify:false,
+});
 var db=mongoose.connection;
 db.on('error',console.error.bind(console,"Mongodb Connection error"));
+
 app.use(function(req,res,next){
   res.locals.user=req.session.user;
   next();
@@ -38,6 +42,11 @@ app.use(function(req,res,next){
 app.use('/', indexRouter);
 app.use('/api',apiAdminRouter);
 app.use('/api/users',apiUserRouter);
+app.use('/api/auth',apiAuthRouter);
+app.use('/api/profile',apiProfileRouter);
+
+app.use(express.json({extended:false}));
+
 app.use(function (req,res,next){
   if(req.session.user){
     next();
