@@ -12,6 +12,7 @@ var apiUserRouter=require('./api/routes/user');
 var apiAdminRouter=require('./api/routes/admin');
 var apiAuthRouter=require('./api/routes/auth');
 var apiProfileRouter=require('./api/routes/profile');
+var apiPostRouter=require('./api/routes/post');
 
 var app = express();
 
@@ -44,6 +45,7 @@ app.use('/api',apiAdminRouter);
 app.use('/api/users',apiUserRouter);
 app.use('/api/auth',apiAuthRouter);
 app.use('/api/profile',apiProfileRouter);
+app.use('/api/post',apiPostRouter),
 
 app.use(express.json({extended:false}));
 
